@@ -1,0 +1,17 @@
+spring:
+  application:
+    name: webauthn-server
+
+server:
+  ssl:
+    certificate: "classpath:cert/public.crt"
+    certificate-private-key: "classpath:cert/private.key"
+    trust-certificate: "classpath:cert/ca.pem"
+    key-password: "6446cacc51c0467ab5fe94bff50ac3ad"
+  port: 443
+
+---
+spring:
+  config:
+    activate:
+      on-profile: local
