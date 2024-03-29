@@ -70,3 +70,4 @@ libopenal.dylib
 /deployment/gcp/vm/rabbitmq/fullchain.pem
 /deployment/gcp/vm/rabbitmq/privkey.pem
 /react_app/ssl/generated/
+/webauthn-server/src/main/resources/ssl/generated/

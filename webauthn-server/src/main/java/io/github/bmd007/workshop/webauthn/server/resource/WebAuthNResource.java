@@ -25,17 +25,16 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.Optional;
 
 @CrossOrigin(origins = {
-        "https://localhost.localdomain",
         "http://localhost",
+        "http://localhost:3000",
         "https://localhost",
-        "http://localhost:3000"
-}
-        , originPatterns = {"https://*.staging.wonderland.se"})
+        "https://localhost:3000",
+}, originPatterns = {"https://*.localhost"})
 @Slf4j
 @RestController
 @RequestMapping("v1")
 public class WebAuthNResource {
-//todo use rsocket instead of rest ==> rename the rest style path to verb style path
+    //todo use rsocket instead of rest ==> rename the rest style path to verb style path
     private final WebAuthNService webAuthNService;
 
     public WebAuthNResource(WebAuthNService webAuthNService) {
