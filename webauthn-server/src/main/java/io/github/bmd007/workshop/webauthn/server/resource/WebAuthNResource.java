@@ -88,6 +88,7 @@ public class WebAuthNResource {
 
     @PostMapping(value = "authentications/results")
     public SuccessfulAuthenticationResult finishAuthentication(@RequestBody AssertionResponse assertionResponse) {
+        log.info("finishAuthentication: {}", assertionResponse);
         return webAuthNService.finishAuthentication(assertionResponse);
     }
 }
