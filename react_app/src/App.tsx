@@ -38,9 +38,10 @@ function App() {
         }
     }
 
+    // only chrome and yubikeys support usernameless and userhandleless login
     async function webauthnAuthenticationWithNoUsernameAndNoUserHandle() {
         const authenticateRequestBody = {
-            username: 'mahdi',
+            username: null,
             userHandle: null
         };
         const authenticationRequestResponseBody = (await fetch('https://local.bmd007.github.io:8080/v1/authentications/assertions/requests', {

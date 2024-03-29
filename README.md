@@ -19,3 +19,17 @@ openssl pkcs12 -export -in local.bmd007.github.io+4.pem -inkey local.bmd007.gith
 cp keystore.p12 ../../webauthn-server/src/main/resources/ssl/generated/keystore.p12
 ``` 
 
+
+## links:
+ - [Webauthn API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Authentication_API)
+ - [Webauthn Guide](https://webauthn.guide/)
+ - [Webauthn Demo](https://webauthn.io/)
+ - [Webauthn Playground](https://webauthn-playground.glitch.me/)
+ - [Webauthn - Yubikey](https://developers.yubico.com/WebAuthn/)
+ - [https://webauthn.wtf/](https://webauthn.wtf/)
+ - [https://webauthn.me/](https://webauthn.me/)
+ - [https://www.w3.org/TR/webauthn-2/](https://www.w3.org/TR/webauthn-2/)
+ - [https://www.yubico.com/authentication-standards/webauthn/](https://www.yubico.com/authentication-standards/webauthn/) 
+ - [Webauthn Java Server](https://developers.yubico.com/java-webauthn-server/)
+
+
