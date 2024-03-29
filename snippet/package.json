@@ -1,7 +1,0 @@
-{
-  "dependencies": {
-    "@github/webauthn-json": "^2.1.1",
-    "react-device-detect": "^2.1.2",
-    "url": "^0.11.0"
-  }
-}

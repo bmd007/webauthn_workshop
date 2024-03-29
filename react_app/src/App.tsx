@@ -1,15 +1,9 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
-import {create} from "@github/webauthn-json";
+import {create, get} from "@github/webauthn-json";
 
 function App() {
-
-    async function getHello() {
-        const response = await fetch('https://local.bmd007.github.io:8080/v1');
-        const data = await response.text();
-        alert(data);
-    }
 
     async function registerWebAuthnOnThisDevice() {
         const registerRequestBody = {
@@ -44,12 +38,45 @@ function App() {
         }
     }
 
+    async function webauthnAuthenticationWithNoUsernameAndNoUserHandle() {
+        const authenticateRequestBody = {
+            username: null,
+            userHandle: null
+        };
+        const authenticationRequestResponseBody = (await fetch('https://local.bmd007.github.io:8080/v1/authentications/assertions/requests', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(authenticateRequestBody)
+        }));
+        const authenticationRequest = await authenticationRequestResponseBody.json();
+        const options = {
+            publicKey: authenticationRequest.publicKeyCredentialRequestOptions,
+        };
+        const credential = await get(options);
+        const authenticationResultResponseBody = (await fetch('https://local.bmd007.github.io:8080/v1/authentications/results', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({requestId: authenticationRequest.requestId, credential})
+        }));
+        const authenticationResult = await authenticationResultResponseBody.json();
+        if (authenticationResult.success) {
+            alert(`webauthn authentication successful`);
+        } else {
+            alert(`webauthn authentication failed`);
+        }
+    }
+
     return (
         <div className="App">
             <header className="App-header">
                 <img src={logo} className="App-logo" alt="logo"/>
-                <button onClick={getHello}>Hello</button>
-                <button onClick={registerWebAuthnOnThisDevice}>registerWebAuthnOnThisDevice</button>
+                <button onClick={registerWebAuthnOnThisDevice}>Register WebAuthn On This Device</button>
+                <button onClick={webauthnAuthenticationWithNoUsernameAndNoUserHandle}>Username/Passwordless login
+                </button>
             </header>
         </div>
     );
