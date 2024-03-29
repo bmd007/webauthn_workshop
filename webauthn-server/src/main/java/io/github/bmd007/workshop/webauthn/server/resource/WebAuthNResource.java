@@ -25,17 +25,14 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.Optional;
 
 @CrossOrigin(origins = {
-        "https://localhost",
-        "https://localhost:3000",
-        "https://localhost:8080",
-        "https://local.bmd007.github.io:8080",
         "https://local.bmd007.github.io:3000",
-}, originPatterns = {"https://*.localhost"})
+        "https://localhost:3000",
+}, originPatterns = {"https://*.local.bmd007.github.io"})
 @Slf4j
 @RestController
 @RequestMapping("v1")
 public class WebAuthNResource {
-    //todo use rsocket instead of rest ==> rename the rest style path to verb style path
+    //todo use rsocket instead of rest ==> rename the rest style path to streaming verb style path
     private final WebAuthNService webAuthNService;
 
     public WebAuthNResource(WebAuthNService webAuthNService) {
@@ -59,7 +56,7 @@ public class WebAuthNResource {
 
     @PostMapping("credentials/registrations/requests")
     public RegistrationRequest startRegistration(@RequestBody RegisterRequestBody registerRequest, @RequestParam String validatedUsername) {
-        //validatedUsername should be fetched from a session or a jwt instead of query param
+        //todo validatedUsername should be fetched from a session or an accessToken instead of query param
         return webAuthNService.startRegistration(
                 validatedUsername,
                 registerRequest.displayName,
@@ -88,7 +85,6 @@ public class WebAuthNResource {
 
     @PostMapping(value = "authentications/results")
     public SuccessfulAuthenticationResult finishAuthentication(@RequestBody AssertionResponse assertionResponse) {
-        log.info("finishAuthentication: {}", assertionResponse);
         return webAuthNService.finishAuthentication(assertionResponse);
     }
 }

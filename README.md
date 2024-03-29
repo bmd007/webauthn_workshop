@@ -16,9 +16,20 @@ cd react_app/ssl/generated
 mkcert local.bmd007.github.io '*.local.bmd007.github.io' localhost 127.0.0.1 ::1
 #choose bmd007 for the password of keystore:
 openssl pkcs12 -export -in local.bmd007.github.io+4.pem -inkey local.bmd007.github.io+4-key.pem -out keystore.p12 -name localdev
-cp keystore.p12 ../../webauthn-server/src/main/resources/ssl/generated/keystore.p12
+cp keystore.p12 ../../../webauthn-server/src/main/resources/ssl/generated
 ``` 
 
+## Requirements
+- Java 21 (requires JAVA_HOME to be set
+- node 18.17
+- npm 10
+
+## Starting the applications
+```shell
+cd webauthn-server && ./gradlew bootRun
+cd ..
+cd react_app && npm start
+```
 
 ## links:
  - [Webauthn API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Authentication_API)
