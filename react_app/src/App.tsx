@@ -5,11 +5,11 @@ import {create, get} from "@github/webauthn-json";
 
 function App() {
 
-    async function registerWebAuthnOnThisDevice() {
+    async function registerWebAuthn(sameDevice = true) {
         const registerRequestBody = {
             displayName: 'mahdi',
             credentialNickname: 'this-device-credential-123',
-            authenticatorAttachment: "platform" // or "cross-platform" based on your requirement
+            authenticatorAttachment: sameDevice ? "platform" : "cross-platform"
         };
         const registrationRequestResponseBody = (await fetch('https://local.bmd007.github.io:8080/v1/credentials/registrations/requests?validatedUsername=mahdi', {
             method: 'POST',
@@ -38,6 +38,7 @@ function App() {
         }
     }
 
+    // only chrome and yubikeys support usernameless and userhandleless login
     async function webauthnAuthenticationWithNoUsernameAndNoUserHandle() {
         const authenticateRequestBody = {
             username: null,
@@ -74,9 +75,11 @@ function App() {
         <div className="App">
             <header className="App-header">
                 <img src={logo} className="App-logo" alt="logo"/>
-                <button onClick={registerWebAuthnOnThisDevice}>Register WebAuthn On This Device</button>
-                <button onClick={webauthnAuthenticationWithNoUsernameAndNoUserHandle}>Username/Passwordless login
-                </button>
+                <div>
+                    <button onClick={_ => registerWebAuthn(true)}>Enroll this Device</button>
+                    <button onClick={_ => registerWebAuthn(false)}>Enroll another Device</button>
+                </div>
+                <button onClick={webauthnAuthenticationWithNoUsernameAndNoUserHandle}>Username/Passwordless login</button>
             </header>
         </div>
     );

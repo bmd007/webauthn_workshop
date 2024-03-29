@@ -33,8 +33,7 @@ public final class YubicoJsonMetadataService implements AttestationTrustSource, 
     private static final String SELECTOR_TYPE = "type";
     private static final String SELECTOR_PARAMETERS = "parameters";
 
-    private static final Map<String, DeviceMatcher> DEFAULT_DEVICE_MATCHERS =
-            Map.of(ExtensionMatcher.SELECTOR_TYPE, new ExtensionMatcher());
+    private static final Map<String, DeviceMatcher> DEFAULT_DEVICE_MATCHERS = Map.of(ExtensionMatcher.SELECTOR_TYPE, new ExtensionMatcher());
 
     private final Collection<MetadataObject> metadataObjects;
     private final Map<String, DeviceMatcher> matchers;
@@ -63,10 +62,7 @@ public final class YubicoJsonMetadataService implements AttestationTrustSource, 
     }
 
     public YubicoJsonMetadataService() {
-        this(
-                Stream.of(MetadataObject.readDefault(), MetadataObject.readPreview())
-                        .collect(Collectors.toList()),
-                DEFAULT_DEVICE_MATCHERS);
+        this(Stream.of(MetadataObject.readDefault(), MetadataObject.readPreview()).collect(Collectors.toList()), DEFAULT_DEVICE_MATCHERS);
     }
 
     @Override
@@ -135,8 +131,7 @@ public final class YubicoJsonMetadataService implements AttestationTrustSource, 
     }
 
     @Override
-    public TrustRootsResult findTrustRoots(
-            List<X509Certificate> attestationCertificateChain, Optional<ByteArray> aaguid) {
+    public TrustRootsResult findTrustRoots(List<X509Certificate> attestationCertificateChain, Optional<ByteArray> aaguid) {
         return TrustRootsResult.builder()
                 .trustRoots(trustRootCertificates)
                 .enableRevocationChecking(false)
