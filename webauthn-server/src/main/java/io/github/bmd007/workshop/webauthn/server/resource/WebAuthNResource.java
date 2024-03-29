@@ -28,6 +28,8 @@ import java.util.Optional;
         "https://localhost",
         "https://localhost:3000",
         "https://localhost:8080",
+        "https://local.bmd007.github.io:8080",
+        "https://local.bmd007.github.io:3000",
 }, originPatterns = {"https://*.localhost"})
 @Slf4j
 @RestController
@@ -57,22 +59,13 @@ public class WebAuthNResource {
 
     @PostMapping("credentials/registrations/requests")
     public RegistrationRequest startRegistration(@RequestBody RegisterRequestBody registerRequest, @RequestParam String validatedUsername) {
+        //validatedUsername should be fetched from a session or a jwt instead of query param
         return webAuthNService.startRegistration(
                 validatedUsername,
                 registerRequest.displayName,
                 Optional.ofNullable(registerRequest.credentialNickname),
                 registerRequest.authenticatorAttachment);
     }
-
-//    @PostMapping("credential/cross-platform")
-//    public RegistrationRequest startRegistrationCrossPlatform(@RequestBody RegisterRequestBody registerRequest,
-//                                                              @RequestParam String validatedUsername) {
-//        return webAuthNService.startRegistration(
-//                validatedUsername,
-//                registerRequest.displayName,
-//                Optional.ofNullable(registerRequest.credentialNickname),
-//                AuthenticatorAttachment.CROSS_PLATFORM);
-//    }
 
     @PostMapping("credentials/registrations/results")
     public SuccessfulRegistrationResult finishRegistration(@RequestBody RegistrationResponse registrationResponse) {

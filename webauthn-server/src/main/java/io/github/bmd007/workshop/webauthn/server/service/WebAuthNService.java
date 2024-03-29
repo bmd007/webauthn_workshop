@@ -66,16 +66,16 @@ public final class WebAuthNService {
     public WebAuthNService(InMemoryRegistrationStorage userStorage) throws InvalidAppIdException {
         this.userStorage = userStorage;
         swedishRelyingParty = RelyingParty.builder()
-                .identity(RelyingPartyIdentity.builder().id("localhost").name("Wonderland WebAuthn SE").build())
+                .identity(RelyingPartyIdentity.builder().id("local.bmd007.github.io").name("WebAuthn workshop").build())
                 .credentialRepository(this.userStorage)
-                .origins(Set.of("https://localhost","https://localhost:8080","https://localhost:3000"))
+                .origins(Set.of("https://local.bmd007.github.io"))
                 .allowOriginPort(true)
                 .allowOriginSubdomain(true)
                 .attestationConveyancePreference(AttestationConveyancePreference.DIRECT)
                 .attestationTrustSource(metadataService)
                 .allowUntrustedAttestation(true)
 //                .validateSignatureCounter(true)
-                .appId(new AppId("https://localhost"))
+                .appId(new AppId("https://local.bmd007.github.io"))
                 .build();
     }
 

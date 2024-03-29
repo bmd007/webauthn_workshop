@@ -6,7 +6,7 @@ import {create} from "@github/webauthn-json";
 function App() {
 
     async function getHello() {
-        const response = await fetch('https://localhost:8080/v1');
+        const response = await fetch('https://local.bmd007.github.io:8080/v1');
         const data = await response.text();
         alert(data);
     }
@@ -17,7 +17,7 @@ function App() {
             credentialNickname: 'this-device-credential-123',
             authenticatorAttachment: "platform" // or "cross-platform" based on your requirement
         };
-        const registrationRequestResponseBody = (await fetch('https://localhost:8080/v1/credentials/registrations/requests', {
+        const registrationRequestResponseBody = (await fetch('https://local.bmd007.github.io:8080/v1/credentials/registrations/requests?validatedUsername=mahdi', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -29,7 +29,7 @@ function App() {
             publicKey: registrationRequest.publicKeyCredentialCreationOptions,
         };
         const credential = await create(options);
-        const registrationResultResponseBody = await fetch('https://localhost:8080/v1/credentials/registrations/results', {
+        const registrationResultResponseBody = await fetch('https://local.bmd007.github.io:8080/v1/credentials/registrations/results', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
