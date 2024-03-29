@@ -26,10 +26,13 @@ cp keystore.p12 ../../../webauthn-server/src/main/resources/ssl/generated
 
 ## Starting the applications
 ```shell
+# ports 8080 and 3000 should be free !
 cd webauthn-server && ./gradlew bootRun
 cd ..
 cd react_app && npm start
 ```
+open [https://local.bmd007.github.io:3000](https://local.bmd007.github.io:3000) in browser
+
 
 ## links:
  - [Webauthn API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Authentication_API)
@@ -47,5 +50,17 @@ cd react_app && npm start
 
 
 ## TODO
-- [ ] Add Flutter client 
-- [ ] Add more information about the Webauthn API
+- [ ] Improve UI/UX.
+  - [ ] Customize the webauthn UI.
+- [ ] Upgrade to the latest version of com.yubico:webauthn-server-core and refactor accordingly.
+  - [ ] Clean up not required dependencies.
+  - [ ] Check if [attestation](webauthn-server%2Fsrc%2Fmain%2Fjava%2Fcom%2Fyubico%2Fwebauthn%2Fattestation) is actually needed to be part of this repo.
+- [ ] Understand the certificate setup of webauthn itself. 
+- [ ] Understand how to recognize and limit possible authenticators.
+- [ ] Use Rsocket instead of HTTP.
+- [ ] Try wehauthn4j and compare.
+  - [ ] Even add spring security to the mix
+    -  [ ] Is there a reactive spring security started available? 
+- [ ] Add Flutter client.
+- [ ] Add a pure HTML/JS client
+- [ ] Contribute to the com.yubico:webauthn-server-core project and suggest improvements regarding use of optional.
