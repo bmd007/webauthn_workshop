@@ -196,26 +196,6 @@ public final class WebAuthNService {
         return credentialRegistration;
     }
 
-    public AssertionRequestWrapper startAuthenticationOld(String username) {
-        if (!userStorage.userExists(username)) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "user not registered");
-        } else {
-            var assertionExtensionInputs = AssertionExtensionInputs.builder()
-                    .uvm()
-                    .build();
-            var startAssertionOptions = StartAssertionOptions.builder()
-                    .userVerification(UserVerificationRequirement.PREFERRED)
-                    .extensions(assertionExtensionInputs)
-                    .username(username)
-                    .timeout(999_999_999L)
-                    .build();
-            AssertionRequest assertionRequest = swedishRelyingParty.startAssertion(startAssertionOptions);
-            var assertionRequestWrapper = new AssertionRequestWrapper(randomUUIDByteArray(), assertionRequest);
-            assertRequestStorage.put(assertionRequestWrapper.getRequestId(), assertionRequestWrapper);
-            return assertionRequestWrapper;
-        }
-    }
-
     public AssertionRequestWrapper startAuthentication(ByteArray userHandle) {
         return startAuthentication(null, userHandle);
     }
@@ -248,26 +228,6 @@ public final class WebAuthNService {
                 .publicKeyCredentialRequestOptions(publicKeyOptionsWithAllowCredentials)
                 .build();
         var assertionRequestWrapper = new AssertionRequestWrapper(randomUUIDByteArray(), improvedAssertionRequest);
-        assertRequestStorage.put(assertionRequestWrapper.getRequestId(), assertionRequestWrapper);
-        return assertionRequestWrapper;
-    }
-
-    public AssertionRequestWrapper startAuthenticationOld(ByteArray userHandle) {
-        Collection<CredentialRegistration> registrationsByUserHandle = userStorage.getRegistrationsByUserHandle(userHandle);
-        if (registrationsByUserHandle.isEmpty()) {
-            throw new ResponseStatusException(HttpStatus.FORBIDDEN, "no registration found for handle " + userHandle);
-        }
-        var assertionExtensionInputs = AssertionExtensionInputs.builder()
-                .uvm()
-                .build();
-        var startAssertionOptions = StartAssertionOptions.builder()
-                .userVerification(UserVerificationRequirement.PREFERRED)
-                .extensions(assertionExtensionInputs)
-                .userHandle(userHandle)
-                .timeout(999_999_999L)
-                .build();
-        AssertionRequest assertionRequest = swedishRelyingParty.startAssertion(startAssertionOptions);
-        var assertionRequestWrapper = new AssertionRequestWrapper(randomUUIDByteArray(), assertionRequest);
         assertRequestStorage.put(assertionRequestWrapper.getRequestId(), assertionRequestWrapper);
         return assertionRequestWrapper;
     }
