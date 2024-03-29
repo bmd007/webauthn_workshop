@@ -25,10 +25,9 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.Optional;
 
 @CrossOrigin(origins = {
-        "http://localhost",
-        "http://localhost:3000",
         "https://localhost",
         "https://localhost:3000",
+        "https://localhost:8080",
 }, originPatterns = {"https://*.localhost"})
 @Slf4j
 @RestController
