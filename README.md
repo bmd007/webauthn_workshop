@@ -14,7 +14,7 @@ brew install mkcert
 mkcert -install
 cd react_app/ssl/generated
 mkcert local.bmd007.github.io '*.local.bmd007.github.io' localhost 127.0.0.1 ::1
-#choose bmd007 for the password of keystore:
+#Enter 'password' for the password of keystore:
 openssl pkcs12 -export -in local.bmd007.github.io+4.pem -inkey local.bmd007.github.io+4-key.pem -out keystore.p12 -name localdev
 cp keystore.p12 ../../../webauthn-server/src/main/resources/ssl/generated
 ``` 
@@ -44,3 +44,8 @@ cd react_app && npm start
  - [https://www.yubico.com/authentication-standards/webauthn/](https://www.yubico.com/authentication-standards/webauthn/) 
  - [Webauthn Java Server](https://developers.yubico.com/java-webauthn-server/)
  - [Authenticators list](https://webauthn.passwordless.id/demos/authenticators.html)
+
+
+## TODO
+- [ ] Add Flutter client 
+- [ ] Add more information about the Webauthn API
