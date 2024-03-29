@@ -4,10 +4,10 @@ spring:
 
 server:
   ssl:
-    certificate: "classpath:cert/public.crt"
-    certificate-private-key: "classpath:cert/private.key"
-    trust-certificate: "classpath:cert/ca.pem"
-    key-password: "6446cacc51c0467ab5fe94bff50ac3ad"
+#    certificate: "classpath:ssl/generated/public.crt"
+    certificate-private-key: "classpath:ssl/generated/localhost-key.pem"
+    trust-certificate: "classpath:ssl/generated/localhost.pem"
+#    key-password: "0032c31b563d4667809a6a058f0e5528"
   port: 443
 
 ---
