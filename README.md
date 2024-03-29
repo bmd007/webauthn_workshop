@@ -35,6 +35,7 @@ The backend is built using Spring Boot.
 - [ ] Add a pure HTML/JS client
 - [ ] Contribute to the com.yubico:webauthn-server-core project and suggest improvements regarding use of optional.
 - [ ] Dockerization of the project.
+- [ ] Backend in other languages?
 
 ## Requirements
 - Java 21 (requires JAVA_HOME to be set
